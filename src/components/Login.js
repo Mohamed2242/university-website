@@ -10,6 +10,7 @@ const Login = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
 	const [facultyName, setFaculty] = useState("");
 	const [role, setRole] = useState("");
 	const [errors, setErrors] = useState({}); // For tracking validation errors
@@ -115,6 +116,11 @@ const Login = () => {
 		}
 	};
 
+	// Toggle password visibility
+	const togglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
+
 	return (
 		<div className="min-h-screen bg-university-gradient flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -166,27 +172,62 @@ const Login = () => {
 						</div>
 
 						{/* Password Input */}
+						{/* Password Input with Eye Icon */}
 						<div>
 							<label className="block text-sm font-medium text-gray-700">
 								Password
 							</label>
-							<input
-								type="password"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								placeholder="Enter your password"
-								className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-							/>
+							<div className="relative">
+								<input
+									type={showPassword ? "text" : "password"} // Toggle between text and password
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+									placeholder="Enter your password"
+									className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+								/>
+								{/* Eye Icon for toggling password visibility */}
+								<span
+									className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+									onClick={togglePasswordVisibility}
+								>
+									{showPassword ? (
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-6 w-6 text-gray-700"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M13.875 18.825A10.03 10.03 0 0112 19c-5.523 0-10-4.477-10-10S6.477 0 12 0c2.042 0 3.962.612 5.625 1.675M15 15L9 9m6 6a3 3 0 01-4.95-2.121M9 9a3 3 0 013 3"
+											/>
+										</svg>
+									) : (
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-6 w-6 text-gray-700"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M12 4.75c-5.418 0-9.75 3.73-9.75 7.75s4.332 7.75 9.75 7.75 9.75-3.73 9.75-7.75S17.418 4.75 12 4.75zM12 0c6.628 0 12 5.373 12 12s-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0z"
+											/>
+										</svg>
+									)}
+								</span>
+							</div>
 							{errors.password && (
 								<p className="text-red-500 text-sm">{errors.password}</p>
 							)}
-							<p
-								className="mt-2 text-sm text-blue-600 cursor-pointer"
-								onClick={() => setShowForgotPasswordModal(true)}
-							>
-								Forgot Password?
-							</p>
 						</div>
+
 
 						{/* Role Selection */}
 						<div>
