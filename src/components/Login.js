@@ -78,7 +78,7 @@ const Login = () => {
 				navigate(`/doctor/${email}`);
 			} else if (role === "Assistant") {
 				navigate(`/assistant/${email}`);
-			} 
+			}
 		} catch (error) {
 			toast.error(error.response?.data?.message || "Login failed", {
 				autoClose: 1500,
@@ -90,7 +90,7 @@ const Login = () => {
 	const handleSendResetEmail = async () => {
 		if (!backupEmail || !email) {
 			setBackupEmailError("Backup Email is required");
-			setEmailError("Email is required")
+			setEmailError("Email is required");
 			return;
 		}
 
@@ -103,7 +103,9 @@ const Login = () => {
 		}
 
 		try {
-			await axiosInstance.post(`${URL.SEND_EMAIL_TO_RESET_PASS_FOR_FORGOT}${backupEmail}/${email}`);
+			await axiosInstance.post(
+				`${URL.SEND_EMAIL_TO_RESET_PASS_FOR_FORGOT}${backupEmail}/${email}`
+			);
 			toast.success("Reset email sent successfully", { autoClose: 1500 });
 			setShowForgotPasswordModal(false);
 			setEmail("");
@@ -243,14 +245,14 @@ const Login = () => {
 			{showForgotPasswordModal && (
 				<div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
 					<div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-					<h2 className="text-xl font-semibold text-center">
+						<h2 className="text-xl font-semibold text-center">
 							Enter your email
 						</h2>
 						<div className="mt-4">
 							<input
 								type="email"
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								value={email} // This is the primary email input
+								onChange={(e) => setEmail(e.target.value)} // Update email state
 								placeholder="Enter email"
 								className="w-full px-3 py-2 border border-gray-300 rounded-md"
 							/>
@@ -265,8 +267,8 @@ const Login = () => {
 						<div className="mt-4">
 							<input
 								type="email"
-								value={backupEmail}
-								onChange={(e) => setBackupEmail(e.target.value)}
+								value={backupEmail} // This is the backup email input
+								onChange={(e) => setBackupEmail(e.target.value)} // Update backupEmail state separately
 								placeholder="Enter backup email"
 								className="w-full px-3 py-2 border border-gray-300 rounded-md"
 							/>
@@ -284,9 +286,9 @@ const Login = () => {
 							<button
 								className="px-4 py-2 bg-gray-400 text-white rounded-md"
 								onClick={() => {
-									setEmail("")
-									setBackupEmail(""); // Clear the email field
-									setShowForgotPasswordModal(false); // Hide the modal
+									setEmail(""); // Clear email field
+									setBackupEmail(""); // Clear backup email field
+									setShowForgotPasswordModal(false); // Hide modal
 								}}
 							>
 								Cancel
