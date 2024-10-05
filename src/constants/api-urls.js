@@ -16,7 +16,7 @@ const URL = {
     GET_CGPA: "Student/GetCGPA/",
 
     GET_COURSES_FOR_DOCTOR: "Doctor/GetCoursesForDoctor/",
-    GET_STUDENTS_BY_COURSE_FOR_DOCTOR: "Doctor/GetStudentsByCourse/",
+    GET_STUDENTS_BY_COURSE_AND_STUDENT_ID: "Doctor/GetStudentsByCourseAndStudentId/",
     GET_STUDENT_DEGREES_BY_COURSE_FOR_DOCTOR: "Doctor/GetStudentsDegreesForCourse/",
     UPDATE_STUDENT_DEGREE_BY_DOCTOR: "Doctor/EditStudentDegreesForDoctor/",
 

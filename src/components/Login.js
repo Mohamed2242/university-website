@@ -16,7 +16,7 @@ const Login = () => {
 	const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 	const [backupEmail, setBackupEmail] = useState("");
 	const [backupEmailError, setBackupEmailError] = useState("");
-	const [emailError, setemailError] = useState("");
+	const [emailError, setEmailError] = useState("");
 
 	const roles = ["Admin", "Student", "Doctor", "Assistant"];
 	const faculties = [
@@ -90,15 +90,15 @@ const Login = () => {
 	const handleSendResetEmail = async () => {
 		if (!backupEmail || !email) {
 			setBackupEmailError("Backup Email is required");
-			setemailError("Email is required")
+			setEmailError("Email is required")
 			return;
 		}
 
 		// Simple email validation
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!emailRegex.test(backupEmail) || !emailRegex.test(email)) {
-			setBackupEmailError("Please enter a valid email");
-			setemailError("Please enter a valid email");
+			setBackupEmailError("Please enter a valid backup email");
+			setEmailError("Please enter a valid email");
 			return;
 		}
 
@@ -250,8 +250,8 @@ const Login = () => {
 							<input
 								type="email"
 								value={email}
-								onChange={(e) => setBackupEmail(e.target.value)}
-								placeholder="Enter backup email"
+								onChange={(e) => setEmail(e.target.value)}
+								placeholder="Enter email"
 								className="w-full px-3 py-2 border border-gray-300 rounded-md"
 							/>
 							{emailError && (
