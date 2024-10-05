@@ -1,6 +1,6 @@
 
 const URL = {
-    BASE_URL: "http://localhost:5101/api/",
+    BASE_URL: "https://universityapi.runasp.net/api/",
 
 	LOGIN_URL: "Home/login",
     REFRESH_URL: "Home/refresh",
