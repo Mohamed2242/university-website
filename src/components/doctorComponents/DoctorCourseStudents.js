@@ -29,9 +29,9 @@ const DoctorCourseStudentsPage = () => {
         try {
             setLoading(true); // Start loading
             const response = await axiosInstance.get(
-                `${URL.GET_STUDENTS_BY_COURSE_AND_STUDENT_ID}/${courseId}/${studentId}`
+                `${URL.GET_STUDENTS_BY_COURSE_AND_STUDENT_ID}${courseId}/${studentId}`
             );
-            setStudents(response.data.$values); // Set the students data
+            setStudents(response.data); // Set the students data
             setLoading(false); // End loading
         } catch (error) {
             setLoading(false); // End loading even on error
@@ -41,7 +41,7 @@ const DoctorCourseStudentsPage = () => {
 
     // Fetch students when the component mounts or when the courseId changes
     useEffect(() => {
-        fetchStudents();
+        fetchStudents(); // Fetch all students by default
     }, [courseId]);
 
     // Handle filter input change and fetch filtered students
