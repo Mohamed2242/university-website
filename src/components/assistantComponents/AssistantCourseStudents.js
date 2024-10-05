@@ -43,11 +43,6 @@ const AssistantCourseStudentsPage = () => {
 		return <div>Loading...</div>;
 	}
 
-	// Back button handler
-	const handleBack = () => {
-		navigate(-1); // Navigate back to the previous page
-	};
-
 	// Render the students data once it's fetched
 	return (
 		<div className="min-h-screen bg-university-gradient">
