@@ -16,6 +16,7 @@ const Login = () => {
 	const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 	const [backupEmail, setBackupEmail] = useState("");
 	const [backupEmailError, setBackupEmailError] = useState("");
+	const [emailError, setemailError] = useState("");
 
 	const roles = ["Admin", "Student", "Doctor", "Assistant"];
 	const faculties = [
@@ -87,22 +88,25 @@ const Login = () => {
 
 	// Handle forgot password pop-up submission
 	const handleSendResetEmail = async () => {
-		if (!backupEmail) {
+		if (!backupEmail || !email) {
 			setBackupEmailError("Backup Email is required");
+			setemailError("Email is required")
 			return;
 		}
 
 		// Simple email validation
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(backupEmail)) {
+		if (!emailRegex.test(backupEmail) || !emailRegex.test(email)) {
 			setBackupEmailError("Please enter a valid email");
+			setemailError("Please enter a valid email");
 			return;
 		}
 
 		try {
-			await axiosInstance.post(`${URL.SEND_EMAIL_TO_RESET_PASS}${backupEmail}`);
+			await axiosInstance.post(`${URL.SEND_EMAIL_TO_RESET_PASS_FOR_FORGOT}${backupEmail}/${email}`);
 			toast.success("Reset email sent successfully", { autoClose: 1500 });
 			setShowForgotPasswordModal(false);
+			setEmail("");
 			setBackupEmail(""); // Clear the input field
 		} catch (error) {
 			toast.error("Failed to send reset email", { autoClose: 1500 });
@@ -239,6 +243,22 @@ const Login = () => {
 			{showForgotPasswordModal && (
 				<div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
 					<div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+					<h2 className="text-xl font-semibold text-center">
+							Enter your email
+						</h2>
+						<div className="mt-4">
+							<input
+								type="email"
+								value={email}
+								onChange={(e) => setBackupEmail(e.target.value)}
+								placeholder="Enter backup email"
+								className="w-full px-3 py-2 border border-gray-300 rounded-md"
+							/>
+							{emailError && (
+								<p className="text-red-500 text-sm">{emailError}</p>
+							)}
+						</div>
+
 						<h2 className="text-xl font-semibold text-center">
 							Enter your backup email
 						</h2>
@@ -264,6 +284,7 @@ const Login = () => {
 							<button
 								className="px-4 py-2 bg-gray-400 text-white rounded-md"
 								onClick={() => {
+									setEmail("")
 									setBackupEmail(""); // Clear the email field
 									setShowForgotPasswordModal(false); // Hide the modal
 								}}

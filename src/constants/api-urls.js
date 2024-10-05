@@ -5,7 +5,7 @@ const URL = {
 	LOGIN_URL: "Home/login",
     REFRESH_URL: "Home/refresh",
     RESETPASSWORD: "Home/reset-password",
-    SEND_EMAIL_TO_RESET_PASS: "Home/send-reset-email/",
+    SEND_EMAIL_TO_RESET_PASS_FOR_FORGOT: "Home/send-reset-email/",
     
     GET_STUDENT_BY_EMAIL: "Student/",
     GET_AVAILABLE_COURSES: "Student/available-courses/",
