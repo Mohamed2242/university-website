@@ -171,7 +171,6 @@ const Login = () => {
 							)}
 						</div>
 
-						{/* Password Input */}
 						{/* Password Input with Eye Icon */}
 						<div>
 							<label className="block text-sm font-medium text-gray-700">

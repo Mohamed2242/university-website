@@ -120,7 +120,6 @@ const ManageAssistants = () => {
 								<tr>
 									<th className="px-4 py-2 border">Assistant Email</th>
 									<th className="px-4 py-2 border">Name</th>
-									<th className="px-4 py-2 border">Salary</th>
 									<th className="px-4 py-2 border">Actions</th>
 								</tr>
 							</thead>
@@ -132,10 +131,7 @@ const ManageAssistants = () => {
 										</td>
 										<td className="px-4 py-2 text-center border">
 											{asst.name}
-										</td>
-										<td className="px-4 py-2 text-center border">
-											{asst.salary}
-										</td>
+										</td>										
 										<td className="px-4 py-2 flex justify-center space-x-4">
 											{/* Details Button */}
 											<button
